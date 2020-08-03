@@ -1,6 +1,6 @@
 # library_book
 
-A new Flutter application.
+This is the library app that uses firebase for authentication. But, the database to store borrowed book online is still under development. For purpose of this prototype application, I only used temporary hardcoded database to show how this application will look like.
 
 ## Getting Started
 
