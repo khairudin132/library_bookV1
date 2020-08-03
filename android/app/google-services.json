@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "285994038266",
+    "firebase_url": "https://librarybook-e46e0.firebaseio.com",
+    "project_id": "librarybook-e46e0",
+    "storage_bucket": "librarybook-e46e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285994038266:android:dc3570e9aa2bf659dc6a43",
+        "android_client_info": {
+          "package_name": "com.khairudin.library_book"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285994038266-g4o6h5qushvhdo2c28ffavaggt5aofq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYofaHhKnt-ttHmXnk3vI82HPl3ezl3QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285994038266-g4o6h5qushvhdo2c28ffavaggt5aofq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
