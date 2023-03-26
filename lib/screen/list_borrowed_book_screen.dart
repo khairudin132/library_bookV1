@@ -18,7 +18,7 @@ class _ListBorrowedBookState extends State<ListBorrowedBook> {
       body: ListView.builder(
         itemCount: myBooks.length,
         itemBuilder: (BuildContext context, int index) {
-          return BorrowedBookTile(myBooks[index]);
+          return BorrowedBookTile(book: myBooks[index]);
         },
       ),
     );

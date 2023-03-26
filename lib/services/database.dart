@@ -3,8 +3,8 @@ import 'package:library_book/model/book.dart';
 import 'package:library_book/model/user.dart';
 
 class Database {
-  final Firestore _firestore = Firestore.instance;
-  List<Book> borrowedBook = List();
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+  List<Book> borrowedBook = [];
 
   //untuk cari current userid
 
@@ -30,11 +30,11 @@ class Database {
 //    }
 //  }
 
-  Future<String> createUser(User user) async {
+  Future<String> createUser(UserModel user) async {
     String returnVal = 'error';
 
     try {
-      await _firestore.collection('users').document(user.uid).setData({
+      await _fireStore.collection('users').doc(user.id).set({
         'fullName': user.fullName,
         'email': user.email,
         'accountCreated': Timestamp.now(),
@@ -51,14 +51,14 @@ class Database {
     String returnVal = 'error';
     try {
       borrowedBook.add(book);
-      await _firestore
+      await _fireStore
           .collection('users')
-          .document('E4sywYbLB1cdNM6sFFiBgmR0Rjo1')
+          .doc('E4sywYbLB1cdNM6sFFiBgmR0Rjo1')
           .collection('borrowed book')
           .add({
-        'book title': book.bookTitle.trim(),
+        'book title': book.bookTitle?.trim(),
         'image': book.image,
-        'author': book.authorName.trim(),
+        'author': book.authorName?.trim(),
         'borrowed date': Timestamp.now(),
         'return date': book.returnDate,
       });
@@ -74,33 +74,39 @@ class Database {
     Book returnVal = Book();
 
     try {
-      DocumentSnapshot _docSnapshot = await _firestore
+      DocumentSnapshot _docSnapshot = await _fireStore
           .collection('users')
-          .document(userName)
+          .doc(userName)
           .collection('borrowed book')
-          .document(bookId)
+          .doc(bookId)
           .get();
-      returnVal.bookId = bookId;
-      returnVal.bookTitle = _docSnapshot.data['book title'];
-      returnVal.authorName = _docSnapshot.data['author'];
-      returnVal.image = _docSnapshot.data['image'];
-      returnVal.borrowedDate = _docSnapshot.data['borrow date'];
+
+      returnVal.copyWith(
+        id: int.parse(bookId),
+        bookTitle: _docSnapshot['book title'],
+        authorName: _docSnapshot['author'],
+        image: _docSnapshot['image'],
+        borrowedDate: _docSnapshot['borrow date'],
+      );
     } catch (e) {
       print(e);
     }
     return returnVal;
   }
 
-  Future<User> getUserInfo(String uid) async {
-    User returnVal = User();
+  Future<UserModel> getUserInfo(String uid) async {
+    UserModel returnVal = UserModel();
 
     try {
       DocumentSnapshot _docSnapshot =
-          await _firestore.collection('users').document(uid).get();
-      returnVal.uid = uid;
-      returnVal.fullName = _docSnapshot.data['fullName'];
-      returnVal.email = _docSnapshot.data['email'];
-      returnVal.accountCreated = _docSnapshot.data['accountCreated'];
+          await _fireStore.collection('users').doc(uid).get();
+
+      returnVal.copyWith(
+        id: uid,
+        fullName: _docSnapshot['fullName'],
+        email: _docSnapshot['email'],
+        accountCreated: _docSnapshot['accountCreated'],
+      );
     } catch (e) {
       print(e);
     }

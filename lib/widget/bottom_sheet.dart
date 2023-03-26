@@ -1,27 +1,22 @@
-//use this to appear bottom sheet
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:library_book/model/book.dart';
 
-class BottomSheetModal extends StatefulWidget {
-  Book _book;
+class ModalBottomSheet extends StatefulWidget {
+  // ------------------------------- CONSTRUCTORS ------------------------------
+  const ModalBottomSheet({super.key, required this.book});
 
-  BottomSheetModal(Book book) {
-    _book = book;
-  }
+  final Book book;
+
+  // ------------------------------- PROPERTIES --------------------------------
 
   @override
-  _BottomSheetModalState createState() => _BottomSheetModalState(_book);
+  State<ModalBottomSheet> createState() => _ModalBottomSheetState();
 }
 
-class _BottomSheetModalState extends State<BottomSheetModal> {
-  Book book;
+class _ModalBottomSheetState extends State<ModalBottomSheet> {
+  // ----------------------------- FIELDS --------------------------------------
 
-  _BottomSheetModalState(Book book) {
-    this.book = book;
-  }
-
+  // ------------------------------- METHODS -----------------------------------
   //Date time picker
 //  Future<Null> _selectdate(BuildContext context) async {
 //    final DateTime _seldate = await showDatePicker(
@@ -48,11 +43,12 @@ class _BottomSheetModalState extends State<BottomSheetModal> {
 
   mainBottomSheet(BuildContext context) {
     DateTime _todayBorrowBook = DateTime.now();
-    book.borrowedDate = _todayBorrowBook;
+    widget.book.borrowedDate = _todayBorrowBook;
 
+    // TODO
     //format today date
-    String _todayBorrowDate =
-        DateFormat("E, dd-MM-yyyy").format(book.borrowedDate);
+    // String _todayBorrowDate =
+    //     DateFormat("E, dd-MM-yyyy").format(book.borrowedDate);
 
     showModalBottomSheet(
         context: context,
@@ -70,9 +66,11 @@ class _BottomSheetModalState extends State<BottomSheetModal> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.black54, width: 1.5),
                     ),
+                    // TODO
                     child: Center(
                         child: Text(
-                      _todayBorrowDate,
+                      // _todayBorrowDate,
+                      '',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Colors.black45,
@@ -116,7 +114,7 @@ class _BottomSheetModalState extends State<BottomSheetModal> {
         });
   }
 
-  //Date time picker function into textformfield
+//Date time picker function into textformfield
 //  mainBottomSheet(BuildContext context) {
 //    String _formattedate = new DateFormat.yMd().format(_currentdate);
 //    showModalBottomSheet(
@@ -173,5 +171,4 @@ class _BottomSheetModalState extends State<BottomSheetModal> {
 //          );
 //        });
 //  }
-
 }

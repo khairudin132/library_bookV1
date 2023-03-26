@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ShadowContainer extends StatelessWidget {
+  const ShadowContainer({super.key, required this.child});
+
   final Widget child;
-  const ShadowContainer({Key key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

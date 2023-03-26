@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:library_book/model/book.dart';
 import 'package:library_book/widget/carousel.dart';

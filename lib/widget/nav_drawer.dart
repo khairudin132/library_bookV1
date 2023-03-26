@@ -13,10 +13,13 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-                color: Colors.green,
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage('images/mountain.jpg'))),
+              color: Colors.green,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('images/mountain.jpg'),
+              ),
+            ),
+            child: const SizedBox(),
           ),
           ListTile(
             leading: Icon(Icons.verified_user),

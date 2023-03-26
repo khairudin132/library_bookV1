@@ -28,7 +28,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             (route) => false);
       } else {
-        Scaffold.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(_returnString),
             duration: Duration(seconds: 2),
@@ -73,7 +73,7 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: true,
           ),
           SizedBox(height: 20),
-          RaisedButton(
+          ElevatedButton(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 100),
               child: Text(
@@ -90,7 +90,7 @@ class _LoginFormState extends State<LoginForm> {
                   _emailController.text, _passwordController.text, context);
             },
           ),
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
@@ -98,7 +98,6 @@ class _LoginFormState extends State<LoginForm> {
                 ),
               );
             },
-            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
             child: Text(
               'Don\'t have an account? Sign up here',
             ),

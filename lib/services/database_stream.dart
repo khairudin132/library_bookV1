@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:library_book/model/user.dart';
 
 class DBStream {
-  Firestore _firestore = Firestore.instance;
+  FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
-  Stream<User> getCurrentUser(String uid) {
-    return _firestore
+  Stream<UserModel> getCurrentUser(String uid) {
+    return _fireStore
         .collection('users')
-        .document(uid)
+        .doc(uid)
         .snapshots()
-        .map((docSnapshot) => User.fromDocumentSnapshot(doc: docSnapshot));
+        .map((docSnapshot) => UserModel.fromDocumentSnapshot(doc: docSnapshot));
   }
 }

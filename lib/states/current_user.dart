@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:library_book/model/user.dart';
 import 'package:library_book/services/database.dart';
 
-class CurrentUser extends ChangeNotifier {
-  User _currentUser = User();
+import '../model/model.dart';
 
-  User get getCurrentUser => _currentUser;
+class CurrentUser extends ChangeNotifier {
+  UserModel _currentUser = UserModel();
+
+  UserModel get currentUser => _currentUser;
 
   FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -15,13 +16,9 @@ class CurrentUser extends ChangeNotifier {
     String returnVal = 'error';
 
     try {
-      FirebaseUser _firebaseUser = await _auth.currentUser();
-      if (_currentUser != null) {
-        _currentUser = await Database().getUserInfo(_firebaseUser.uid);
-        if (_currentUser != null) {
-          returnVal = 'success';
-        }
-      }
+      User? _firebaseUser = _auth.currentUser!;
+      _currentUser = await Database().getUserInfo(_firebaseUser.uid);
+      returnVal = 'success';
     } catch (e) {
       print(e);
     }
@@ -32,19 +29,19 @@ class CurrentUser extends ChangeNotifier {
   Future<String> signUpUser(
       String email, String password, String fullName) async {
     String returnVal = 'error ';
-    User _user = User();
+    UserModel _user = UserModel();
     try {
-      AuthResult _authResult = await _auth.createUserWithEmailAndPassword(
+      UserCredential _authResult = await _auth.createUserWithEmailAndPassword(
           email: email.trim(), password: password);
-      _user.uid = _authResult.user.uid;
-      _user.email = _authResult.user.email;
+      _user.id = _authResult.user?.uid;
+      _user.email = _authResult.user?.email;
       _user.fullName = fullName;
       String _returnString = await Database().createUser(_user);
       if (_returnString == 'success') {
         returnVal = 'success';
       }
     } on PlatformException catch (e) {
-      returnVal = e.message;
+      returnVal = e.message!;
     } catch (e) {
       print(e);
     }
@@ -57,7 +54,7 @@ class CurrentUser extends ChangeNotifier {
 
     try {
       await _auth.signOut();
-      _currentUser = User();
+      _currentUser = UserModel();
       returnVal = 'success';
     } catch (e) {
       print(e);
@@ -70,14 +67,12 @@ class CurrentUser extends ChangeNotifier {
     String returnVal = 'error ';
 
     try {
-      AuthResult _authResult = await _auth.signInWithEmailAndPassword(
+      UserCredential _authResult = await _auth.signInWithEmailAndPassword(
           email: email.trim(), password: password);
-      _currentUser = await Database().getUserInfo(_authResult.user.uid);
-      if (_currentUser != null) {
-        returnVal = 'success';
-      }
+      _currentUser = await Database().getUserInfo(_authResult.user?.uid ?? '');
+      returnVal = 'success';
     } on PlatformException catch (e) {
-      returnVal = e.message;
+      returnVal = e.message!;
     } catch (e) {
       print(e);
     }

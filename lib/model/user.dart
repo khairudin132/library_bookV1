@@ -1,28 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class User {
-  String uid;
-  String email;
-  Timestamp accountCreated;
-  String fullName;
-  String groupId;
-  String notifToken;
-
-  User({
-    this.uid,
+class UserModel {
+  UserModel({
+    this.id,
     this.email,
     this.accountCreated,
     this.fullName,
     this.groupId,
-    this.notifToken,
+    this.notifyToken,
   });
 
-  User.fromDocumentSnapshot({DocumentSnapshot doc}) {
-    uid = doc.documentID;
-    email = doc.data['email'];
-    accountCreated = doc.data['accountCreated'];
-    fullName = doc.data['fullName'];
-    groupId = doc.data['groupId'];
-    notifToken = doc.data['notifToken'];
+  UserModel.fromDocumentSnapshot({required DocumentSnapshot doc}) {
+    id = doc.id;
+    email = doc['email'];
+    accountCreated = doc['accountCreated'];
+    fullName = doc['fullName'];
+    groupId = doc['groupId'];
+    notifyToken = doc['notifyToken'];
   }
+
+  UserModel copyWith({
+    String? id,
+    String? email,
+    Timestamp? accountCreated,
+    String? fullName,
+    String? groupId,
+    String? notifyToken,
+  }) =>
+      UserModel(
+        id: id ?? this.id,
+        email: email ?? this.email,
+        accountCreated: accountCreated ?? this.accountCreated,
+        fullName: fullName ?? this.fullName,
+        groupId: groupId ?? this.groupId,
+        notifyToken: notifyToken ?? this.notifyToken,
+      );
+
+  String? id;
+  String? email;
+  Timestamp? accountCreated;
+  String? fullName;
+  String? groupId;
+  String? notifyToken;
 }

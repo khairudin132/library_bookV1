@@ -23,7 +23,7 @@ class _SignUpFormState extends State<SignUpForm> {
       if (_returnString == "success") {
         Navigator.pop(context);
       } else {
-        Scaffold.of(context).showSnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(_returnString),
             duration: Duration(seconds: 2),
@@ -87,7 +87,7 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: 20),
           Container(
             width: MediaQuery.of(context).size.width,
-            child: RaisedButton(
+            child: ElevatedButton(
               child: Text(
                 'Sign Up',
                 style: TextStyle(
@@ -102,7 +102,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   _signUpUser(_emailController.text, _passwordController.text,
                       _fullNameController.text, context);
                 } else {
-                  Scaffold.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("Passwords do not match"),
                       duration: Duration(seconds: 2),

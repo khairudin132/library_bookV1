@@ -13,7 +13,7 @@ class OurRoot extends StatefulWidget {
 
 class _OurRootState extends State<OurRoot> {
   AuthStatus _authStatus = AuthStatus.notLoggedIn;
-  String currentUid;
+  String? currentUserId;
 
   @override
   void didChangeDependencies() async {
@@ -35,17 +35,11 @@ class _OurRootState extends State<OurRoot> {
 
   @override
   Widget build(BuildContext context) {
-    Widget retVal;
-
     switch (_authStatus) {
       case AuthStatus.notLoggedIn:
-        retVal = Login();
-        break;
+        return Login();
       case AuthStatus.loggedIn:
-        retVal = HomeScreen();
-        break;
-      default:
+        return HomeScreen();
     }
-    return retVal;
   }
 }

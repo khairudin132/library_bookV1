@@ -1,29 +1,48 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Book {
-  String bookId;
-  int id;
-  String bookTitle;
-  String authorName;
-  String description =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id neque libero. Donec finibus sem viverra, luctus nisi ac, semper enim. Vestibulum in mi feugiat, mattis erat suscipit, fermentum quam. Mauris non urna sed odio congue rhoncus. \nAliquam a dignissim ex. Suspendisse et sem porta, consequat dui et, placerat tortor. Sed elementum nunc a blandit euismod. Cras condimentum faucibus dolor. Etiam interdum egestas sagittis. Aliquam vitae molestie eros. Cras porta felis ac eros pellentesque, sed lobortis mi eleifend. Praesent ut.';
-  int available;
-  String image;
-  DateTime borrowedDate;
-  DateTime returnDate;
-  String remainingDays;
-
   Book({
-    this.bookId,
     this.id,
     this.bookTitle,
     this.authorName,
+    this.description,
     this.available,
     this.image,
     this.borrowedDate,
     this.returnDate,
     this.remainingDays,
   });
+
+  Book copyWith({
+    int? id,
+    String? bookTitle,
+    String? authorName,
+    String? description,
+    int? available,
+    String? image,
+    DateTime? borrowedDate,
+    DateTime? returnDate,
+    String? remainingDays,
+  }) =>
+      Book(
+        id: id ?? this.id,
+        bookTitle: bookTitle ?? this.bookTitle,
+        authorName: authorName ?? this.authorName,
+        description: description ?? this.description,
+        available: available ?? this.available,
+        image: image ?? this.image,
+        borrowedDate: borrowedDate ?? this.borrowedDate,
+        returnDate: returnDate ?? this.returnDate,
+        remainingDays: remainingDays ?? this.remainingDays,
+      );
+
+  int? id;
+  String? bookTitle;
+  String? authorName;
+  String? description;
+  int? available;
+  String? image;
+  DateTime? borrowedDate;
+  DateTime? returnDate;
+  String? remainingDays;
 
 //  Book.fromDocumentSnapshot({DocumentSnapshot doc}) {
 //    bookId = doc.documentID;

@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:library_book/model/book.dart';
 import 'package:library_book/screen/book_desc_screen.dart';
 
 class Carousel extends StatelessWidget {
-  @required
-  final String title;
-  @required
-  final List<Book> category;
-
   Carousel({
-    this.title,
-    this.category,
+    required this.title,
+    required this.category,
   });
+
+  final String title;
+  final List<Book> category;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +41,8 @@ class Carousel extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BookDesc(category[index])));
+                          builder: (context) =>
+                              BookDescriptionPage(book: category[index])));
                 },
                 child: Container(
                   width: 150,
@@ -69,7 +67,7 @@ class Carousel extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(6),
                             child: Image.asset(
-                              category[index].image,
+                              category[index].image ?? '',
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -77,7 +75,7 @@ class Carousel extends StatelessWidget {
                       ),
                       Container(
                         child: Text(
-                          category[index].bookTitle,
+                          category[index].bookTitle ?? '',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: TextStyle(

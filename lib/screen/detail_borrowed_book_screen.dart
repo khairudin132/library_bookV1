@@ -1,47 +1,44 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:library_book/model/book.dart';
-import 'package:library_book/widget/carousel.dart';
 import 'package:toast/toast.dart';
 
-Book bookDesc = Book();
-Carousel bookCategory = Carousel();
+import '../model/book.dart';
 
-class DetailBorrowedBook extends StatefulWidget {
-  Book _book;
+class DetailBorrowedBookPage extends StatefulWidget {
+  // ------------------------------- CONSTRUCTORS ------------------------------
+  const DetailBorrowedBookPage({super.key, required this.book});
 
-  DetailBorrowedBook(Book book) {
-    _book = book;
-  }
+  final Book book;
+
+  // ------------------------------- PROPERTIES --------------------------------
 
   @override
-  _DetailBorrowedBookState createState() => _DetailBorrowedBookState(_book);
+  State<DetailBorrowedBookPage> createState() => _DetailBorrowedBookPageState();
 }
 
-class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
-  Book book;
+class _DetailBorrowedBookPageState extends State<DetailBorrowedBookPage> {
+  // ----------------------------- FIELDS --------------------------------------
 
-  _DetailBorrowedBookState(Book book) {
-    this.book = book;
-  }
-
+  // ------------------------------- METHODS -----------------------------------
   @override
   Widget build(BuildContext context) {
+    // TODO
     //format today date
-    String _todayBorrowDate =
-        DateFormat("E, dd-MM-yyyy").format(book.borrowedDate);
+    // String _todayBorrowDate =
+    // DateFormat("E, dd-MM-yyyy").format(widget.book.borrowedDate);
 
+    // TODO
     //add one month
-    DateTime _addOneMonthReturnDate = book.borrowedDate.add(Duration(days: 30));
-    book.returnDate = _addOneMonthReturnDate;
+    // DateTime _addOneMonthReturnDate = widget.book.borrowedDate.add(Duration(days: 30));
+    // widget.book.returnDate = _addOneMonthReturnDate;
 
+    // TODO
     //format return date
-    String _returnDate = DateFormat("E, dd-MM-yyyy").format(book.returnDate);
+    // String _returnDate = DateFormat("E, dd-MM-yyyy").format(widget.book.returnDate);
 
+    // TODO
     //remaining days
-    Duration difference = book.returnDate.difference(book.borrowedDate);
-    book.remainingDays = difference.inDays.toString();
+    // Duration difference = widget.book.returnDate.difference(widget.book.borrowedDate);
+    // widget.book.remainingDays = difference.inDays.toString();
     return SafeArea(
       top: true,
       child: Scaffold(
@@ -74,7 +71,8 @@ class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
                       ),
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(6),
-                          child: Image.asset(book.image, fit: BoxFit.cover)),
+                          child: Image.asset(widget.book.image ?? '',
+                              fit: BoxFit.cover)),
                     ),
                     SizedBox(width: 18),
                     Expanded(
@@ -82,13 +80,13 @@ class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            book.bookTitle,
+                            widget.book.bookTitle ?? '',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 24),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            book.authorName,
+                            widget.book.authorName ?? '',
                             style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 18),
                           ),
@@ -109,8 +107,10 @@ class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               SizedBox(height: 15),
+              // TODO
               Text(
-                _todayBorrowDate,
+                // _todayBorrowDate,
+                '',
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
@@ -122,8 +122,10 @@ class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               SizedBox(height: 15),
+              // TODO
               Text(
-                _returnDate,
+                // _returnDate,
+                '',
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
@@ -136,7 +138,7 @@ class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
               ),
               SizedBox(height: 15),
               Text(
-                '${book.remainingDays} days left',
+                '${widget.book.remainingDays} days left',
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
@@ -145,16 +147,18 @@ class _DetailBorrowedBookState extends State<DetailBorrowedBook> {
               Expanded(child: SizedBox(height: 35)),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: RaisedButton(
+                child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      myBooks.remove(book);
+                      myBooks.remove(widget.book);
                     });
-                    Toast.show("Thank you!", context,
-                        duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                    Toast.show("Thank you!",
+                        duration: Toast.lengthShort, gravity: Toast.bottom);
                   },
-                  textColor: Colors.white,
-                  padding: const EdgeInsets.all(0.0),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    padding: const EdgeInsets.all(0.0),
+                  ),
                   child: Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(

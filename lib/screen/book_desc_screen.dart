@@ -1,34 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:library_book/model/book.dart';
-import 'package:library_book/widget/bottom_sheet.dart';
-import 'package:library_book/widget/carousel.dart';
 import 'package:toast/toast.dart';
 
-Book bookDesc = Book();
-Carousel bookCategory = Carousel();
+class BookDescriptionPage extends StatefulWidget {
+  // ------------------------------- CONSTRUCTORS ------------------------------
+  const BookDescriptionPage({super.key, required this.book});
 
-class BookDesc extends StatefulWidget {
-  Book _book;
+  final Book book;
 
-  BookDesc(Book book) {
-    _book = book;
-  }
+  // ------------------------------- PROPERTIES --------------------------------
 
   @override
-  _BookDescState createState() => _BookDescState(_book);
+  State<BookDescriptionPage> createState() => _BookDescriptionPageState();
 }
 
-class _BookDescState extends State<BookDesc> {
-  Book book;
+class _BookDescriptionPageState extends State<BookDescriptionPage> {
+  // ----------------------------- FIELDS --------------------------------------
 
-  _BookDescState(Book book) {
-    this.book = book;
-  }
-
+  // ------------------------------- METHODS -----------------------------------
   @override
   Widget build(BuildContext context) {
-    final bool alreadyBorrowed = myBooks.contains(book);
+    final bool alreadyBorrowed = myBooks.contains(widget.book);
     return SafeArea(
       top: true,
       child: Scaffold(
@@ -46,7 +38,7 @@ class _BookDescState extends State<BookDesc> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Hero(
-                      tag: book,
+                      tag: widget.book,
                       child: Container(
                         width: 130,
                         height: 200,
@@ -62,7 +54,8 @@ class _BookDescState extends State<BookDesc> {
                         ),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(6),
-                            child: Image.asset(book.image, fit: BoxFit.cover)),
+                            child: Image.asset(widget.book.image ?? '',
+                                fit: BoxFit.cover)),
                       ),
                     ),
                     SizedBox(width: 18),
@@ -71,19 +64,19 @@ class _BookDescState extends State<BookDesc> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            book.bookTitle,
+                            widget.book.bookTitle ?? '',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 20),
                           ),
                           SizedBox(height: 5),
                           Text(
-                            book.authorName,
+                            widget.book.authorName ?? '',
                             style: TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 15),
                           ),
                           SizedBox(height: 12),
                           Text(
-                            "Available: ${book.available.toString()}",
+                            "Available: ${widget.book.available.toString()}",
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.w500),
@@ -108,7 +101,7 @@ class _BookDescState extends State<BookDesc> {
               ),
               SizedBox(height: 15),
               Text(
-                bookDesc.description,
+                widget.book.description ?? '',
                 style: TextStyle(
                     fontWeight: FontWeight.w400,
                     fontSize: 15,
@@ -124,17 +117,20 @@ class _BookDescState extends State<BookDesc> {
   Widget clickButton() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () {
-          //function terus borrow book tanpa bottom sheet
-          myBooks.add(book);
-          Toast.show("You have successfully borrow this book", context,
-              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          // TODO function terus borrow book tanpa bottom sheet
+          myBooks.add(widget.book);
+          Toast.show("You have successfully borrow this book",
+              duration: Toast.lengthShort, gravity: Toast.bottom);
           DateTime todayBorrowBook = DateTime.now();
-          book.borrowedDate = todayBorrowBook;
+          // TODO
+          // widget.book.borrowedDate = todayBorrowBook;
         },
-        textColor: Colors.white,
-        padding: const EdgeInsets.all(0.0),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.zero,
+        ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -156,13 +152,15 @@ class _BookDescState extends State<BookDesc> {
   Widget disabledButton() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: () {
-          Toast.show("You have borrowed this book", context,
-              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          Toast.show("You have borrowed this book",
+              duration: Toast.lengthShort, gravity: Toast.bottom);
         },
-        textColor: Colors.white,
-        padding: const EdgeInsets.all(0.0),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.zero,
+        ),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
