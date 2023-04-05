@@ -1,19 +1,18 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:library_book/components/borrowed_book_single_tile.dart';
 import 'package:library_book/model/book.dart';
-import 'package:library_book/widget/borrowed_book_single_tile.dart';
 
-class ListBorrowedBook extends StatefulWidget {
-  @override
-  _ListBorrowedBookState createState() => _ListBorrowedBookState();
-}
+@RoutePage(name: 'ListBorrowedBookPageRoute')
+class ListBorrowedBookPage extends StatelessWidget {
+  const ListBorrowedBookPage({super.key});
 
-class _ListBorrowedBookState extends State<ListBorrowedBook> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Borrowed'),
+        title: const Text('Borrowed'),
       ),
       body: ListView.builder(
         itemCount: myBooks.length,

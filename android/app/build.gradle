@@ -35,6 +35,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -69,8 +75,14 @@ flutter {
     source '../..'
 }
 
+//plugins {
+//    id 'com.android.application'
+//    id 'com.google.gms.google-services'
+//}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation platform('com.google.firebase:firebase-bom:31.3.0')
     // add SDKs for desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
 }

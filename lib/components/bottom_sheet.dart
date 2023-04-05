@@ -5,7 +5,7 @@ class ModalBottomSheet extends StatefulWidget {
   // ------------------------------- CONSTRUCTORS ------------------------------
   const ModalBottomSheet({super.key, required this.book});
 
-  final Book book;
+  final BookModel book;
 
   // ------------------------------- PROPERTIES --------------------------------
 
@@ -42,8 +42,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
   }
 
   mainBottomSheet(BuildContext context) {
-    DateTime _todayBorrowBook = DateTime.now();
-    widget.book.borrowedDate = _todayBorrowBook;
+    DateTime todayBorrowBook = DateTime.now();
+    widget.book.borrowedDate = todayBorrowBook;
 
     // TODO
     //format today date
@@ -67,7 +67,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       border: Border.all(color: Colors.black54, width: 1.5),
                     ),
                     // TODO
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       // _todayBorrowDate,
                       '',
@@ -78,19 +78,19 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                         letterSpacing: 1.2,
                       ),
                     ))),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.date_range),
                     hintText: 'Return date',
                   ),
                 ),
-                SizedBox(height: 20),
-                Divider(
+                const SizedBox(height: 20),
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -98,7 +98,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.lime, width: 1),
                     ),
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       'PROCEED',
                       style: TextStyle(

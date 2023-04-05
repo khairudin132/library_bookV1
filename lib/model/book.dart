@@ -1,5 +1,5 @@
-class Book {
-  Book({
+class BookModel {
+  BookModel({
     this.id,
     this.bookTitle,
     this.authorName,
@@ -11,7 +11,7 @@ class Book {
     this.remainingDays,
   });
 
-  Book copyWith({
+  BookModel copyWith({
     int? id,
     String? bookTitle,
     String? authorName,
@@ -22,7 +22,7 @@ class Book {
     DateTime? returnDate,
     String? remainingDays,
   }) =>
-      Book(
+      BookModel(
         id: id ?? this.id,
         bookTitle: bookTitle ?? this.bookTitle,
         authorName: authorName ?? this.authorName,
@@ -53,43 +53,43 @@ class Book {
 //  }
 }
 
-final List<Book> mostBorrowed = [
-  Book(
+final List<BookModel> mostBorrowed = [
+  BookModel(
     id: 1,
     bookTitle: 'CorelDraw untuk Tingkat Pemula Sampai Mahir',
     authorName: 'Jubilee Enterprise',
     image: 'images/corel.jpg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 2,
     bookTitle: 'Buku Pintar Drafter Untuk Pemula Hingga Mahir',
     authorName: 'Widada',
     image: 'images/drafter.jpg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 3,
     bookTitle: 'Adobe InDesign: Seri Panduan Terlengkap',
     authorName: 'Jubilee Enterprise',
     image: 'images/corel.jpg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 4,
     bookTitle: 'Pemodelan Objek Dengan 3Ds Max 2014',
     authorName: 'Wahana Komputer',
     image: 'images/max_3d.jpeg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 5,
     bookTitle: 'Penerapan Visualisasi 3D Dengan Autodesk Maya',
     authorName: 'Dhani Ariatmanto',
     image: 'images/maya.jpeg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 6,
     bookTitle: 'Teknik Lancar Menggunakan Adobe Photoshop',
     authorName: 'Jubilee Enterprise',
@@ -98,43 +98,43 @@ final List<Book> mostBorrowed = [
   ),
 ];
 
-final List<Book> mostPopular = [
-  Book(
+final List<BookModel> mostPopular = [
+  BookModel(
     id: 7,
     bookTitle: 'Webmaster Series : Trik Cepat Menguasai CSS',
     authorName: 'Wahana Komputer',
     image: 'images/webmaster.jpeg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 8,
     bookTitle: 'Cad Series : Google Sketchup Untuk Desain 3D',
     authorName: 'Wahana Komputer',
     image: 'images/sketchup.jpeg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 9,
     bookTitle: 'Adobe Premiere Terlengkap dan Termudah',
     authorName: 'Jubilee Enterprise',
     image: 'images/premier.jpg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 10,
     bookTitle: 'Pemodelan Objek Dengan 3Ds Max 2014',
     authorName: 'Wahana Komputer',
     image: 'images/max_3d.jpeg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 11,
     bookTitle: 'Penerapan Visualisasi 3D Dengan Autodesk Maya',
     authorName: 'Dhani Ariatmanto',
     image: 'images/maya.jpeg',
     available: 7,
   ),
-  Book(
+  BookModel(
     id: 12,
     bookTitle: 'Teknik Lancar Menggunakan Adobe Photoshop',
     authorName: 'Jubilee Enterprise',
@@ -143,4 +143,4 @@ final List<Book> mostPopular = [
   ),
 ];
 
-final List<Book> myBooks = [];
+final List<BookModel> myBooks = [];

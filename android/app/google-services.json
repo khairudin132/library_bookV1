@@ -30,6 +30,13 @@
             {
               "client_id": "285994038266-g4o6h5qushvhdo2c28ffavaggt5aofq7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "285994038266-90pemi9jukspdupuk1ro16ar8tibgms2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.khairudin.libraryBook"
+              }
             }
           ]
         }

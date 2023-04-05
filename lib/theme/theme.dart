@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 class OurTheme {
-  Color _lightGreen = Color.fromARGB(255, 213, 235, 220);
-  Color _lightGrey = Color.fromARGB(255, 164, 164, 164);
-  Color _darkerGrey = Color.fromARGB(255, 119, 124, 135);
+  final Color _lightGreen = const Color.fromARGB(255, 213, 235, 220);
+  final Color _lightGrey = const Color.fromARGB(255, 164, 164, 164);
+  final Color _darkerGrey = const Color.fromARGB(255, 119, 124, 135);
 
   ThemeData buildTheme() {
     return ThemeData(
       canvasColor: Colors.white,
       primaryColor: Colors.green,
-      accentColor: _lightGrey,
       secondaryHeaderColor: _darkerGrey,
       hintColor: _lightGrey,
       inputDecorationTheme: InputDecorationTheme(
@@ -28,13 +27,13 @@ class OurTheme {
       ),
       buttonTheme: ButtonThemeData(
         buttonColor: _darkerGrey,
-        padding: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         minWidth: 150,
         height: 40.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-      ),
+      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: _lightGrey),
     );
   }
 }

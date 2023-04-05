@@ -1,46 +1,34 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:library_book/model/book.dart';
+import 'package:library_book/router/router.gr.dart';
 
-import '../screen/detail_borrowed_book_screen.dart';
-
-class BorrowedBookTile extends StatefulWidget {
+class BorrowedBookTile extends StatelessWidget {
   // ------------------------------- CONSTRUCTORS ------------------------------
   const BorrowedBookTile({super.key, required this.book});
 
-  final Book book;
+  final BookModel book;
 
   // ------------------------------- PROPERTIES --------------------------------
 
-  @override
-  State<BorrowedBookTile> createState() => _BorrowedBookTileState();
-}
-
-class _BorrowedBookTileState extends State<BorrowedBookTile> {
   // ----------------------------- FIELDS --------------------------------------
-
-  // ------------------------------- METHODS -----------------------------------
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Image.asset(
-        widget.book.image ?? '',
+        book.image ?? '',
         fit: BoxFit.cover,
       ),
       title: Text(
-        widget.book.bookTitle ?? '',
+        book.bookTitle ?? '',
         overflow: TextOverflow.ellipsis,
       ),
-      subtitle: Text(widget.book.authorName ?? ''),
-      trailing: Icon(
+      subtitle: Text(book.authorName ?? ''),
+      trailing: const Icon(
         Icons.arrow_forward_ios,
         color: Colors.lightGreen,
       ),
-      onTap: () => {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-              builder: (context) => DetailBorrowedBookPage(book: widget.book)),
-        )
-      },
+      onTap: () => context.router.push(DetailBorrowedBookPageRoute(book: book)),
     );
   }
 }

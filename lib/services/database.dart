@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:library_book/model/book.dart';
 import 'package:library_book/model/user.dart';
 
 class Database {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  List<Book> borrowedBook = [];
+  List<BookModel> borrowedBook = [];
 
   //untuk cari current userid
 
@@ -42,12 +43,14 @@ class Database {
 
       returnVal = 'success';
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     return returnVal;
   }
 
-  Future<String> createBorrowedBookInfo(String userId, Book book) async {
+  Future<String> createBorrowedBookInfo(String userId, BookModel book) async {
     String returnVal = 'error';
     try {
       borrowedBook.add(book);
@@ -65,16 +68,18 @@ class Database {
 
       returnVal = 'success';
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     return returnVal;
   }
 
-  Future<Book> getBookInfo(String userName, String bookId) async {
-    Book returnVal = Book();
+  Future<BookModel> getBookInfo(String userName, String bookId) async {
+    BookModel returnVal = BookModel();
 
     try {
-      DocumentSnapshot _docSnapshot = await _fireStore
+      DocumentSnapshot docSnapshot = await _fireStore
           .collection('users')
           .doc(userName)
           .collection('borrowed book')
@@ -83,10 +88,10 @@ class Database {
 
       returnVal.copyWith(
         id: int.parse(bookId),
-        bookTitle: _docSnapshot['book title'],
-        authorName: _docSnapshot['author'],
-        image: _docSnapshot['image'],
-        borrowedDate: _docSnapshot['borrow date'],
+        bookTitle: docSnapshot['book title'],
+        authorName: docSnapshot['author'],
+        image: docSnapshot['image'],
+        borrowedDate: docSnapshot['borrow date'],
       );
     } catch (e) {
       print(e);
@@ -98,14 +103,14 @@ class Database {
     UserModel returnVal = UserModel();
 
     try {
-      DocumentSnapshot _docSnapshot =
+      DocumentSnapshot docSnapshot =
           await _fireStore.collection('users').doc(uid).get();
 
       returnVal.copyWith(
         id: uid,
-        fullName: _docSnapshot['fullName'],
-        email: _docSnapshot['email'],
-        accountCreated: _docSnapshot['accountCreated'],
+        fullName: docSnapshot['fullName'],
+        email: docSnapshot['email'],
+        accountCreated: docSnapshot['accountCreated'],
       );
     } catch (e) {
       print(e);
